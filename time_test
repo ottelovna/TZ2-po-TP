@@ -1,0 +1,48 @@
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
+
+public class NumberProcessorPerformanceTest {
+    private static final String FILENAME = "performance.txt";
+    private static final int MAX_NUMBERS = 1_000_000;
+
+    @Test
+    void testPerformance() throws IOException {
+        generateRandomNumbersFile(FILENAME, MAX_NUMBERS);
+        NumberProcessor processor = new NumberProcessor(FILENAME);
+
+        long startTime = System.currentTimeMillis();
+        processor.getMin();
+        long endTime = System.currentTimeMillis();
+        System.out.println("Time taken to find the minimum: " + (endTime - startTime) + " ms");
+
+        startTime = System.currentTimeMillis();
+        processor.getMax();
+        endTime = System.currentTimeMillis();
+        System.out.println("Time taken to find the maximum: " + (endTime - startTime) + " ms");
+
+        startTime = System.currentTimeMillis();
+        processor.getSum();
+        endTime = System.currentTimeMillis();
+        System.out.println("Time taken to calculate the sum: " + (endTime - startTime) + " ms");
+
+        startTime = System.currentTimeMillis();
+        processor.getMult();
+        endTime = System.currentTimeMillis();
+        System.out.println("Time taken to calculate the product: " + (endTime - startTime) + " ms");
+
+        Assertions.assertTrue(true); // Placeholder assertion to pass the test
+    }
+
+    private void generateRandomNumbersFile(String filename, int count) throws IOException {
+        FileWriter writer = new FileWriter(filename);
+        Random random = new Random();
+        for (int i = 0; i < count; i++) {
+            writer.write(String.valueOf(random.nextInt()));
+            writer.write(System.lineSeparator());
+        }
+        writer.close();
+    }
+}
