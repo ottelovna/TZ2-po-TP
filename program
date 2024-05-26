@@ -1,0 +1,58 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class NumberProcessor {
+    private final String filename;
+    public NumberProcessor(String filename) {
+        this.filename = filename;
+    }
+
+    public int getMin() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            int min = Integer.MAX_VALUE;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                int number = Integer.parseInt(line);
+                min = Math.min(min, number);
+            }
+            return min;
+        }
+    }
+
+    public int getMax() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            int max = Integer.MIN_VALUE;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                int number = Integer.parseInt(line);
+                max = Math.max(max, number);
+            }
+            return max;
+        }
+    }
+
+    public long getSum() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            long sum = 0;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                int number = Integer.parseInt(line);
+                sum += number;
+            }
+            return sum;
+        }
+    }
+
+    public long getMult() throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            long mult = 1;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                int number = Integer.parseInt(line);
+                mult *= number;
+            }
+            return mult;
+        }
+    }
+}
