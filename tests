@@ -1,0 +1,49 @@
+mport org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class NumberProcessorTest {
+    private static final String FILENAME = "numbers.txt";
+
+    @Test
+    void testGetMin() throws IOException {
+        writeNumbersToFile(FILENAME, 1, 3, 5, 7, 9);
+        NumberProcessor processor = new NumberProcessor(FILENAME);
+        int min = processor.getMin();
+        Assertions.assertEquals(1, min);
+    }
+
+    @Test
+    void testGetMax() throws IOException {
+        writeNumbersToFile(FILENAME, 1, 3, 5, 7, 9);
+        NumberProcessor processor = new NumberProcessor(FILENAME);
+        int max = processor.getMax();
+        Assertions.assertEquals(9, max);
+    }
+
+    @Test
+    void testGetSum() throws IOException {
+        writeNumbersToFile(FILENAME, 1, 3, 5, 7, 9);
+        NumberProcessor processor = new NumberProcessor(FILENAME);
+        long sum = processor.getSum();
+        Assertions.assertEquals(25, sum);
+    }
+
+    @Test
+    void testGetMult() throws IOException {
+        writeNumbersToFile(FILENAME, 1, 3, 5, 7, 9);
+        NumberProcessor processor = new NumberProcessor(FILENAME);
+        long mult = processor.getMult();
+        Assertions.assertEquals(945, mult);
+    }
+
+    private void writeNumbersToFile(String filename, int... numbers) throws IOException {
+        FileWriter writer = new FileWriter(filename);
+        for (int number : numbers) {
+            writer.write(String.valueOf(number));
+            writer.write(System.lineSeparator());
+        }
+        writer.close();
+    }
+}
